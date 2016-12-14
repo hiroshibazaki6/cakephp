@@ -78,6 +78,7 @@ p {
 /** login Viwe **/
 #content{
 	width: 900px;
+	float: left;
 }
 #create_nav{
 	width: 300px;
