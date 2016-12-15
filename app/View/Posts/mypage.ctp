@@ -5,11 +5,10 @@ echo $this->Form->end('ツイートする');
 ?>
 <table>
 <?php foreach ($comments as $row): ?>
-    <tr>
-        <th><?php echo h($row['Post']['body']); ?></th>
-        <th><?php echo h($row['Post']['created']); ?></th>
-        <th><?php echo $this->Form->postLink('削除',array('action' => 'delete',$row['Post']['id']),array('confirm' => '削除しますか？')); ?></th>
-    </tr>
+    <ul>
+        <li><h2><?php echo h($row['Post']['body']); ?></h2></li>
+        <li><?php echo h($row['Post']['created']); ?></li>
+        <li><?php echo $this->Form->postLink('削除',array('action' => 'delete',$row['Post']['id']),array('confirm' => '削除しますか？')); ?></li>
+    </ul>
 <?php endforeach; ?>
 </table>
-<?php echo $this->Html->link('ログアウト','/Users/logout/'); ?>

@@ -9,10 +9,9 @@ class PostsController extends AppController{
         //ログイン状態を取得
         $user = $this->Auth->user('id');
         //ツイートを表示
-        $option = array(
-            'conditions' => array('user_id' => $user),
-            'order' => array('Post.id' => 'desc')
-            );
+        $option = ['conditions' => ['user_id' => $user],
+            'order' => ['Post.id' => 'desc']
+        ];
         $comments = $this->Post->find('all',$option);
         $this->set('comments',$comments);
             //投稿されたツイートを保存

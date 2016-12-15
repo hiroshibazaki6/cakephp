@@ -3,29 +3,26 @@ App::uses('Controller','Controller');
 class UsersController extends AppController{
     public $helpers = array('Html','Form');
     public $uses = array('User');
-    public $components = array(
-            'Flash',
+    public $components = ['Flash',
             'Session',
-            'Auth' => array(
-                'loginRedirect' => array('controller' => 'posts','action' => 'mypage'),
-                'logoutRedirect' => array('controller' => 'users','action' => 'index'),
-                'loginAction' => array('controller' => 'users','action' => 'login'),
-                'allowedActions' => array('index','login','create')
-                    )
-        );
+            'Auth' => ['loginRedirect' => ['controller' => 'posts','action' => 'mypage'],
+                'logoutRedirect' => ['controller' => 'users','action' => 'index'],
+                'loginAction' => ['controller' => 'users','action' => 'login'],
+                'allowedActions' => ['index','login','create']
+        ]
+                    ];
 
     public function index(){
     }
 
     public function create(){
         if($this->request->is('post')){
-            $data = array(
-                    'name' => $this->request->data['User']['name'],
+            $data = ['name' => $this->request->data['User']['name'],
                     'username' => $this->request->data['User']['username'],
                     'password' => $this->request->data['User']['password'],
                     'password_Confirm' => $this->request->data['User']['password_Confirm'],
                     'mail' => $this->request->data['User']['mail']
-                );
+                    ];
             //データを保存
             $id = $this->User->save($data);
             //入力したデータに誤りがあった場合の処理
