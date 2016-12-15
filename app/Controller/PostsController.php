@@ -7,7 +7,7 @@ class PostsController extends AppController{
 
     public function mypage(){
         //ログイン状態を取得
-        $user = $this->Auth->user('id');
+        $user = $this->Auth->user();
         //ツイートを表示
         $option = ['conditions' => ['user_id' => $user],
             'order' => ['Post.id' => 'desc']
