@@ -16,14 +16,13 @@ class PostsController extends AppController{
         $this->set('comments',$comments);
             //投稿されたツイートを保存
         if($this->request->is('post')){
-            $data = array(
-                'body' => $this->request->data['Post']['body'],
+            $data = ['body' => $this->request->data['Post']['body'],
                 'user_id' => $this->request->data['Post']['user_id'] = $user
-                );
+                ];
             if($this->Post->save($data)){
             //メッセージを表示
             $this->Flash->set('ツイートされました');
-            $this->redirect(array('controller' => 'posts','action' => 'mypage'));
+            $this->redirect(['controller' => 'posts','action' => 'mypage']);
             }else{
             $this->Flash->set('ツイートに失敗しました');
             }
