@@ -17,7 +17,7 @@ class PostsController extends AppController{
             //投稿されたツイートを保存
         if($this->request->is('post')){
             $data = ['body' => $this->request->data['Post']['body'],
-                'user_id' => $this->request->data['Post']['user_id'] = $user
+                'user_id' => $this->request->data['Post']['user_id'] = $user['id']
                 ];
             if($this->Post->save($data)){
             //メッセージを表示
