@@ -6,8 +6,6 @@ class PostsController extends AppController{
     public $components = array('Auth');
 
     public function mypage(){
-        
-        
         //ログイン状態を取得
         $user = $this->Auth->user();
         //ツイートを表示
