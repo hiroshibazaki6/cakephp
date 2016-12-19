@@ -30,7 +30,7 @@ class PostsController extends AppController{
     }
 
     public function search(){
-        
+
     }
 
     public function delete($id){
