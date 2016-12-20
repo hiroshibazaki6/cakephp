@@ -1,11 +1,7 @@
 <?php
 class Post extends AppModel{
     public $name = 'Post';
-
-    public $hasAndBelongsToMany = ['User' =>[
-        'className' => 'User',
-        
-    ]]
+    public $belongsTo ='User';
 
     public $validate = array(
         'body' => array(
