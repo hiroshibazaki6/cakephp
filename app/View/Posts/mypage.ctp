@@ -9,7 +9,7 @@ echo $this->Form->end('ツイートする');
         <th><?php echo h($row['User']['username']); ?></th>
         <th><?php echo h($row['Post']['body']); ?></th>
         <th><?php echo h($row['Post']['created']); ?></th>
-        <th><?php echo $this->Form->postLink('削除',array('action' => 'delete',$row['Post']['id']),array('confirm' => '削除しますか？')); ?></th>
+        <th><?php echo $this->Form->postLink('削除', ['action' => 'delete',$row['Post']['id']], ['confirm' => '削除しますか？']); ?></th>
     </tr>
 <?php endforeach; ?>
 </table>

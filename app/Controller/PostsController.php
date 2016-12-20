@@ -1,9 +1,9 @@
 <?php
 App::uses('Controller','Controller');
 class PostsController extends AppController{
-    public $helpers = array('Html','Form');
-    public $uses = array('User','Post');
-    public $components = array('Auth');
+    public $helpers = ['Html','Form'];
+    public $uses = ['User','Post','Follow'];
+    public $components = ['Auth'];
 
     public function mypage(){
         //ログイン状態を取得
@@ -30,7 +30,28 @@ class PostsController extends AppController{
     }
 
     public function search(){
+        if($this->request->is('post')){
+            $username = ['username' => $this->request->data['User']['username']];
+            //検索の条件を指定（曖昧検索）
+            $option = ['conditions' => ['username like' => '%'.$username['username'].'%']];
+            $data = $this->User->find('all',$option);
+            $this->set('data',$data);
+        }else{
+            $data = $this->User->find('all');
+            $this->set('data',$data);
+        }
+    }
 
+    public function follow($id){
+        if($this->request->is('post')){
+            $user = $this->Auth->user('id');
+            $follow = ['user_id' => $user,
+                       'follower_id' => $id];
+            if($this->Follow->save($follow)){
+                $this->Flash->set('フォローしました');
+                $this->redirect(['controller' => 'posts','action' => 'mypage']);
+            }
+        }
     }
 
     public function delete($id){
@@ -39,7 +60,7 @@ class PostsController extends AppController{
         }
         if($this->Post->delete($id)){
             $this->Flash->set('削除しました');
-            $this->redirect(array('controller' => 'posts','action' => 'mypage'));
+            $this->redirect(['controller' => 'posts','action' => 'mypage']);
         }
     }
 }
