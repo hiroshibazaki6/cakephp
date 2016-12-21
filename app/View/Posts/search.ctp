@@ -5,6 +5,7 @@
     echo $this->Form->input('User.username', ['label' => '誰を検索しますか？']);
     echo $this->Form->end('検索');
 ?>
+<h2>登録ユーザー一覧</h2>
 <table>
     <tr>
         <th>名前</th>

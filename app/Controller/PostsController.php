@@ -14,7 +14,7 @@ class PostsController extends AppController{
         ];
         $comments = $this->Post->find('all',$option);
         $this->set('comments',$comments);
-            //投稿されたツイートを保存
+        //投稿されたツイートを保存
         if($this->request->is('post')){
             $data = ['body' => $this->request->data['Post']['body'],
                 'user_id' => $this->request->data['Post']['user_id'] = $user['id']
@@ -35,6 +35,9 @@ class PostsController extends AppController{
             //検索の条件を指定（曖昧検索）
             $option = ['conditions' => ['username like' => '%'.$username['username'].'%']];
             $data = $this->User->find('all',$option);
+            //検索結果が何件あったかを検索
+            $count = $this->User->find('count',$option);
+            $this->Flash->set($count.'件ヒットしました');
             $this->set('data',$data);
         }else{
             $data = $this->User->find('all');
