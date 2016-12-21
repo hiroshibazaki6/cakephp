@@ -13,3 +13,5 @@ echo $this->Form->end('ツイートする');
     </tr>
 <?php endforeach; ?>
 </table>
+
+<h1><?php echo $this->Html->link('フォロー一覧','/Posts/followlist'); ?></h1>
