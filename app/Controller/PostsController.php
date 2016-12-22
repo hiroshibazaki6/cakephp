@@ -9,7 +9,18 @@ class PostsController extends AppController{
         //ログイン状態を取得
         $user = $this->Auth->user();
         //ツイートを表示
-        $option = ['conditions' => ['user_id' => $user],
+        $options = [
+            'conditions' =>[
+                'Follow.user_id' => $user['id']
+            ]
+        ];
+        $follow = $this->Follow->find('all',$options);
+        $followids = [];
+        foreach ($follow as $key => $value) {
+            $followids[]=$value['Follow']['follower_id'];
+        }
+        $followids[]=$user['id'];
+        $option = ['conditions' => ['user_id' => $followids],
             'order' => ['Post.id' => 'desc']
         ];
         $comments = $this->Post->find('all',$option);
