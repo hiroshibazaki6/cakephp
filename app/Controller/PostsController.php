@@ -48,12 +48,18 @@ class PostsController extends AppController{
     public function followlist(){
         $user = $this->Auth->user();
         $option = [
-            'conditions'=> [
+            'conditions' => [
                 'Follow.user_id' => $user['id'],
-                'Follow.follower_id' => 
             ]
-        ]
-        $data = $this->User->find('all',$option);
+        ];
+        $follow = $this->Follow->find('all',$option);
+        $options = [
+            'conditions' => [
+                'User.id' => $follow['0']['Follow']['follower_id'],
+            ]
+        ];
+        $data = $this->User->find('all',$options);
+        $this->set('data',$data);
     }
 
     public function follow($id){
