@@ -64,9 +64,13 @@ class PostsController extends AppController{
             ]
         ];
         $follow = $this->Follow->find('all',$option);
+        $followids = [];
+        foreach ($follow as $key => $value) {
+            $followids[]=$value['Follow']['follower_id'];
+        }
         $options = [
             'conditions' => [
-                'User.id' => $follow['0']['Follow']['follower_id'],
+                'User.id' => $followids
             ]
         ];
         $data = $this->User->find('all',$options);
