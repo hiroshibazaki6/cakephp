@@ -74,7 +74,32 @@ class PostsController extends AppController{
             ]
         ];
         $data = $this->User->find('all',$options);
+        $count = $this->User->find('count',$options);
         $this->set('data',$data);
+        $this->set('count',$count);
+    }
+
+    public function followerlist(){
+        $user = $this->Auth->user();
+        $option = [
+            'conditions' => [
+                'Follow.follower_id' => $user['id']
+            ]
+        ];
+        $follower = $this->Follow->find('all',$option);
+        $followerids = [];
+        foreach ($follower as $key => $value) {
+            $followerids[] = $value['Follow']['user_id'];
+        }
+        $options = [
+            'conditions' => [
+                'User.id' => $followerids
+            ]
+        ];
+        $data = $this->User->find('all',$options);
+        $count = $this->User->find('count',$options);
+        $this->set('data',$data);
+        $this->set('count',$count);
     }
 
     public function follow($id){
